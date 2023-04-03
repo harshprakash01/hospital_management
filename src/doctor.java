@@ -12,13 +12,16 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 public class doctor{
 	public static void main(String[] arrgs)
 	{
-		String file = "/Users/xtemper/eclipse-workspace/Hospital-Management-App/Hospital.xlsx";
+		String file = GlobalString.file;
+		
 		try {
 			FileInputStream fs = new FileInputStream(file);
 			Workbook WB = WorkbookFactory.create(fs);
 			Sheet s = (Sheet) WB.getSheet("Admin");
 			Row r = ((org.apache.poi.ss.usermodel.Sheet) s).getRow(2);
 			System.out.print("Enter DocAccess Passwd");
+			
+
 			Scanner sc = new Scanner(System.in);
 			String pass = sc.next();
 			Cell c = r.getCell(1);
@@ -29,7 +32,7 @@ public class doctor{
 			}
 		}
 		catch (Exception e ) {
-			
+			System.out.print("Wrong Pass");
 			}
 	}
 		
@@ -59,7 +62,7 @@ class doclogn {
 			Row r = ((org.apache.poi.ss.usermodel.Sheet) s).getRow(pass);
 			Cell c = r.getCell(10);
 			String v = c.getStringCellValue();
-			
+			try {
 			if(v.equals(thispass)) {
 				String opass = "TempPass";
 				opass = opass.concat(String.valueOf(pass));
@@ -77,17 +80,24 @@ class doclogn {
 				
 				
 			}
+			
 			else if(thispass.equals(Decrypt.main(v))) {
 				
 				
 				
-					fn.welcome();			
+					fn.welcome(pass);			
 				
 
 				}
-			else {
-				System.out.println("gghg");
+			
 
+			else {
+				System.out.println("Wrong Pass");
+
+			}
+			}
+			catch (Exception e) {
+				
 			}
 			
 
@@ -140,9 +150,25 @@ class passchng {
 
 
 class fn {
-	static void welcome() {
+	static void welcome(int index) {
 		System.out.print("Welcome");
+		DocConsole.main(index);
 	}
-	
+	void DetailConsole(int RoomNum , String file) {
+		System.out.println("Welcome" );
+		try {
+			FileInputStream fs = new FileInputStream(file);
+			Workbook WB = WorkbookFactory.create(fs);
+			Sheet s = (Sheet) WB.getSheet("Doctors");
+			Scanner sc = new Scanner(System.in);
+			
+			Row r = ((org.apache.poi.ss.usermodel.Sheet) s).getRow(RoomNum);
+			Cell c = r.getCell(10);
+		}
+		catch (Exception e)
+		{
+			
+		}
+	}
 	
 }

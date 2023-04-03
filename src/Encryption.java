@@ -44,8 +44,7 @@ class AES {
 					StandardCharsets.UTF_8)));
 		}
 		catch (Exception e) {
-			System.out.println("Error while encrypting: "
-							+ e.toString());
+			
 		}
 		return null;
 	}
